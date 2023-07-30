@@ -5,6 +5,7 @@ import 'package:grocery_app/components/grocery_item_tile.dart';
 import 'package:grocery_app/screens/map_screens.dart';
 import 'package:grocery_app/screens/store_viewModel.dart';
 import 'package:grocery_app/utils/textStyles.dart';
+import 'package:permission_handler/permission_handler.dart';
 import 'package:provider/provider.dart';
 
 import '../login_flow/profile_completion.dart';
@@ -108,12 +109,13 @@ class _StoreScreenState extends State<StoreScreen> {
                                         },favScreen: favouriteScreen);
                                         list[index].isFavourite = !list[index].isFavourite;
                                       },
-                                      onTapped:(){
+                                      onTapped:()async {
+                                        await Permission.locationWhenInUse.request();
                                         Navigator.push(
                                           context,
                                           MaterialPageRoute(
                                             builder: (context) {
-                                              return const StoreMapScreen();
+                                              return  StoreMapScreen(store:value.storees[index]);
                                             },
                                           ),
                                         );

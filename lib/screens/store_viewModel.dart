@@ -8,18 +8,24 @@ import 'package:grocery_app/utils/appData.dart';
 class Store {
   String name;
   String? id;
+  num ?lat;
+  num? long;
   bool isFavourite=false;
 
 
   Store({
     required this.name,
       this.id,
-    required this.isFavourite
+    required this.isFavourite,
+     this.lat,
+     this.long,
+
   });
 
 
   factory Store.fromJson(Map<String, dynamic> json,id) => Store(
-    name: json["name"], isFavourite:json["isFavourite"] ?? false,id: id
+    name: json["name"], isFavourite:json["isFavourite"] ?? false,id: id,
+      long: json["long"],lat: json["lat"]
   );
 
   Map<String, dynamic> toJson() => {
